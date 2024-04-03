@@ -1,0 +1,186 @@
+{%- liquid
+
+  assign has_image = false
+
+  if section.settings.image != blank
+    assign has_image = true
+  endif
+
+  if has_image
+    assign scale = section.settings.scale
+    assign section_padding = ''
+    if section.settings.section_padding == 'top'
+      assign section_padding = 'mb0'
+    elsif section.settings.section_padding == 'bottom'
+      assign section_padding = 'mt0'
+    elsif section.settings.section_padding == 'none'
+      assign section_padding = 'mt0 mb0'
+    endif
+  else
+    assign section_padding = 'mt0 mb0'
+  endif
+
+  assign desktop_height = section.settings.desktop_height
+  assign mobile_height = section.settings.mobile_height
+
+-%}
+<section
+  class="parallax-{{ section.id }} parallax parallax__section collection__banner-image global__section global__section--margin {{ section_padding }}"
+  data-section-type="iwto-section"
+  data-scale="1.{{ scale }}"
+  data-section-id="{{ section.id }}"
+  data-aos="{{ settings.scroll_animation }}">
+
+  {% if has_image %}
+  <article class="parallax__section-image">
+     {% render 'basic-responsive-image', type: section.settings.image, width: 2000 %}
+  </article>
+  {% endif %}
+  {% if section.settings.floating_title %}
+  <div class="collection__banner-title">
+    <h1>{{ collection.title }}</h1>
+  </div>
+  {% endif %}
+</section>
+
+<div class="clear"></div>
+
+  <style>
+    #shopify-section-{{ section.id }} { 
+      --text-color: {{ section.settings.text_color }};
+      --overlay-color: {{ section.settings.overlay_color }};
+      --desktop-height: {{ desktop_height }}px;
+      --mobile-height: {{ mobile_height }}px;
+      --overlay-color: {{ section.settings.overlay_color }};
+    }
+  {% if has_image %}
+    .no-js .parallax-{{ section.id }} {
+      background-image: url('{{ section.settings.image | image_url: width: 2000 }}');
+      background-size: cover !important;
+      background-repeat: no-repeat !important;
+      background-position: center center !important;
+    }
+    @media screen and ( max-width: 1024px ) {
+      .parallax-{{ section.id }} {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+      }
+    }
+  {% else %}
+    .parallax-{{ section.id }}.parallax {
+      min-height: 0;
+    }
+  {% endif %}
+  {% if section.settings.floating_title %}
+    .collection__page--section-title {
+      display: none;
+    }
+  {% endif %}
+  </style>
+
+
+
+{% schema %}
+{
+  "name": "Collection banner image",
+  "settings":
+  [
+    {
+      "type": "paragraph",
+      "content": "Add a banner image specific to each product using [metafields](https:\/\/www.weareunderground.com/blogs/icon-support/using-metafields-for-product-content), or override metafields by adding an image that will be commonly shared by all products."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "1920px x 1000px recommended"
+    },
+    {
+      "type": "range",
+      "id": "scale",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "label": "Image scale",
+      "default": 2,
+      "info": "The higher the scale the greater the effect, 0 removes parallax scrolling"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 200,
+      "max": 1000,
+      "step": 100,
+      "label": "Desktop image height",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 200,
+      "max": 800,
+      "step": 100,
+      "label": "Mobile image height",
+      "default": 400
+    },
+    {
+      "type":"header",
+      "content":"Collection title"
+    },
+    {
+      "type": "checkbox",
+      "id": "floating_title",
+      "label": "Show collection title on image",
+      "info": "Floats the collection title over the image instead of below",
+      "default":false
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color_background",
+      "id": "overlay_color",
+      "label": "Image overlay",
+      "default": "linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(0, 0, 0, 0.3) 100%)",
+      "info":"Add an overlay to help separate text from the image"
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "bottom"
+    }
+  ],
+  "presets":
+  [
+    {
+      "name": "Collection banner image"
+    }
+  ],
+  "templates":
+  [
+    "collection"
+  ]
+}
+{% endschema %}

@@ -1,0 +1,200 @@
+
+    <style>
+        /* Base grid styles */
+        .custom-grid-container {
+          max-width: 1400px; /* Add max-width property */
+          margin: 0 auto; /* Center the grid container */
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+          padding-left:20px;
+          padding-right:20px;
+          padding-bottom:30px;
+        }
+
+        .custom-grid-item {
+          text-align: center;
+          background-size: cover;
+          background-position: center;
+          height: 370px; /* Adjust the height as needed */
+          position: relative;
+          margin-bottom:100px;
+          transition: opacity 0.7s ease-out;
+        }
+
+        .custom-grid-item:hover {
+          opacity: 0.7;
+        }
+
+        .custom-grid-item a {
+          text-decoration: none;
+          color: inherit;
+        }
+
+        .custom-text-content {
+          position: absolute;
+          bottom: -85px;
+          left: 0;
+          margin: auto;
+          padding: 5px;
+          width: 90%; /* Adjust width as needed */
+          text-align: left;
+          transition: text-decoration 0.7s ease-out;
+        }
+
+        .custom-grid-item:hover .custom-text-content {
+          text-decoration: underline;
+        }
+
+        /* Media query for mobile devices */
+        @media screen and (max-width: 767px) {
+          .custom-grid-container {
+            grid-template-columns: 1fr;
+          }
+          .custom-grid-item .custom-text-content {
+            bottom: -106px;
+          }
+          .custom-grid-item{
+            margin-bottom:81px;
+            height:200px;
+          }
+        }
+        .custom-text-content p{
+          font-family: "Karla",sans-serif;
+          letter-spacing: 3px;
+          font-size:smaller;
+        }
+      .custom-grid-item:hover{
+        opacity:.3s ease-out;
+      }
+    </style>
+
+    <a href="https://www.petitestudionyc.com/pages/inspiration" style="text-decoration:none;"><h3 class="section-title">Get Inspired</h3></a>
+    <div class="custom-grid-container">
+      <a href="{{ section.settings.url_1 }}" class="custom-grid-item" style="background-image: url('{{ section.settings.image1_url.src | image_url }}');">
+            <div class="custom-text-content">
+                <p>{{ section.settings.subheading_1 }}</p>
+                <h2>{{ section.settings.heading_1 }}</h2>
+            </div>
+      </a>
+      <a href="{{ section.settings.url_2 }}" class="custom-grid-item" style="background-image: url('{{ section.settings.image2_url.src | image_url }}');">
+        <div class="custom-text-content">
+            <p>{{ section.settings.subheading_2 }}</p>
+            <h2>{{ section.settings.heading_2 }}</h2>
+        </div>
+      </a>
+      <a href="{{ section.settings.url_3 }}" class="custom-grid-item" style="background-image: url('{{ section.settings.image3_url.src | image_url }}');">
+        <div class="custom-text-content">
+            <p>{{ section.settings.subheading_3 }}</p>
+            <h2>{{ section.settings.heading_3 }}</h2>
+        </div>
+      </a>
+      <a href="{{ section.settings.url_4 }}" class="custom-grid-item" style="background-image: url('{{ section.settings.image4_url.src | image_url }}');">
+        <div class="custom-text-content">
+            <p>{{ section.settings.subheading_4 }}</p>
+            <h2>{{ section.settings.heading_4 }}</h2>
+        </div>
+      </a>
+    </div>
+
+
+{% schema %}
+  {
+    "name": "Homepage Inspiration",
+    "settings": [
+         {
+      "type": "text",
+      "id": "subheading_1",
+      "label": "Heading 1",
+      "default": "Heading 1"
+    },
+        {
+      "type": "text",
+      "id": "heading_1",
+      "label": "Heading 1",
+      "default": "Heading 1"
+    },
+              {
+      "type": "text",
+      "id": "subheading_2",
+      "label": "Subheading 1",
+      "default": "Subheading 2"
+    },
+        {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Heading 1",
+      "default": "Heading 1"
+    },
+    {
+      "type": "text",
+      "id": "subheading_3",
+      "label": "Subheading 3",
+      "default": "Subheading 3"
+    },
+      {
+      "type": "text",
+      "id": "heading_3",
+      "label": "Heading 3",
+      "default": "Heading 3"
+    },
+      {
+      "type": "text",
+      "id": "subheading_4",
+      "label": "Subheading 4",
+      "default": "Subheading 4"
+    },
+        {
+      "type": "text",
+      "id": "heading_4",
+      "label": "Heading 4",
+      "default": "Heading 4"
+    },
+          {
+      "type": "url",
+      "id": "url_1",
+      "label": "Link 1"
+    },
+          {
+      "type": "url",
+      "id": "url_2",
+      "label": "Link 2"
+    },
+          {
+      "type": "url",
+      "id": "url_3",
+      "label": "Link 3"
+    },
+    {
+      "type": "url",
+      "id": "url_4",
+      "label": "Link 4"
+    },
+          {
+      "type": "image_picker",
+      "id": "image1_url",
+      "label": "Image 1"
+    },
+          {
+      "type": "image_picker",
+      "id": "image2_url",
+      "label": "Image 2"
+    },
+          {
+      "type": "image_picker",
+      "id": "image3_url",
+      "label": "Image 3"
+    },
+          {
+      "type": "image_picker",
+      "id": "image4_url",
+      "label": "Image 4"
+    }
+    ],
+    "presets": [
+              {
+        "name": "Homepage Blogs"
+}
+      ]
+  }
+{% endschema %}

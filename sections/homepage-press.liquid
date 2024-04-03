@@ -1,0 +1,109 @@
+<section class="grid homepage-press-section">
+	<div class="grid-m-4 grid-t-12 grid-d-12 press-slider">
+		<div class="content">
+			<h3 class="translation-pending" data-translatable data-chinese-translation="媒体报道">Press</h3>
+			<div class="press-slideshow JS-press-slideshow">
+				{% for block in section.blocks %}
+					<div class="slide">
+						<div class="translation-pending" data-translatable data-chinese-translation="{{ block.settings.blurb_china }}">
+							{{ block.settings.blurb }}
+						</div>
+						<a href="{{ block.settings.article }}" class="line-button translation-pending" data-translatable data-chinese-translation="阅读全文" target="_blank">read full article</a>
+						<div class="image-contain">
+							<img loading="eager" src="{{ block.settings.logo | img_url: '720x720' }}">
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="press-pager JS-press-slider">
+				{% assign count = 0 %}
+				{% for block in section.blocks %}
+					<div class="slide">
+						<div class="pager">
+							<button class="target JS-press-slider-target" data-pager-value={{ count }}></button>
+							<img loading="eager" src='{{ block.settings.logo | img_url: '720x720' }}'>
+						</div>
+					</div>
+					{% assign count = count | plus: 1 %}
+				{% endfor %}
+				{% assign count = 0 %}
+				{% for block in section.blocks %}
+					<div class="slide">
+						<div class="pager">
+							<button class="target JS-press-slider-target" data-pager-value={{ count }}></button>
+							<img loading="eager" src='{{ block.settings.logo | img_url: '720x720' }}'>
+						</div>
+					</div>
+					{% assign count = count | plus: 1 %}
+				{% endfor %}
+				{% assign count = 0 %}
+				{% for block in section.blocks %}
+					<div class="slide">
+						<div class="pager">
+							<button class="target JS-press-slider-target" data-pager-value={{ count }}></button>
+							<img loading="eager" src='{{ block.settings.logo | img_url: '720x720' }}'>
+						</div>
+					</div>
+					{% assign count = count | plus: 1 %}
+				{% endfor %}
+			</div>
+			<div class="press-controls">
+				<div class="press-next-button">
+					<button class="target"></button>
+					<i>
+						<svg width="14px" height="8px" viewBox="0 0 14 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+							<g id="Shape-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+								<polyline stroke="#434343" transform="translate(7.000000, 4.000000) scale(1, -1) rotate(-180.000000) translate(-7.000000, -4.000000) " points="13 6.96117712 7.01947445 1 1 7"></polyline>
+							</g>
+						</svg>
+					</i>
+				</div>
+				<div class="press-prev-button">
+					<button class="target"></button>
+					<i>
+						<svg width="14px" height="8px" viewBox="0 0 14 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+							<g id="Shape-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+								<polyline stroke="#434343" transform="translate(7.000000, 4.000000) scale(1, -1) rotate(-180.000000) translate(-7.000000, -4.000000) " points="13 6.96117712 7.01947445 1 1 7"></polyline>
+							</g>
+						</svg>
+					</i>
+				</div>
+			</div>
+			<div class="press-pager"></div>
+		</div>
+	</div>
+</section>
+{% schema %}
+	{
+		"name": "Press Section",
+		"max_blocks": 8,
+		"blocks": [
+			{
+				"type": "select",
+				"name": "Press Item",
+				"settings": [
+					{
+						"type": "richtext",
+						"id": "blurb",
+						"label": "Blurb"
+					},
+					{
+						"type": "richtext",
+						"id": "blurb_china",
+						"label": "Chinese Blurb"
+					},
+					{
+						"type": "url",
+						"id": "article",
+						"label": "Article URL"
+					},
+					{
+						"type": "image_picker",
+						"id": "logo",
+						"label": "Logo"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

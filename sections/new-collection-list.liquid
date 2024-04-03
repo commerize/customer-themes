@@ -1,0 +1,253 @@
+<style>
+    /* Styles for div grid */
+    .div-grid {
+      max-width: 1200px;
+      margin: 0 auto; /* Center the grid */
+    }
+
+    /* Style for individual divs */
+    .div-grid .grid-container {
+      display: flex;
+      flex-wrap: wrap; /* Allow containers to wrap on smaller screens */
+      gap: 20px; /* Gap between containers */
+      justify-content: center; /* Center the containers horizontally */
+      margin-bottom: 20px;
+    }
+
+    /* Style for individual containers */
+    .div-grid .grid-container .container {
+      flex: 1; /* Equal width for all containers */
+      height: 450px; /* Fixed height for all containers */
+      box-sizing: border-box; /* Include borders in the width */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden; /* Hide overflowing content */
+      position: relative; /* Position container for background image */
+      background-size: cover; /* Cover the entire container with background */
+      background-position: center; /* Center the background */
+      text-align: center; /* Center text within the container */
+    }
+
+    /* Style for headings above images */
+    .div-grid .grid-container .container .image-heading {
+      position: absolute;
+      top: 50%; /* Center vertically */
+      left: 50%; /* Center horizontally */
+      transform: translate(-50%, -50%); /* Center the text */
+      padding: 5px 10px; /* Padding for the heading */
+      border-radius: 5px; /* Rounded corners */
+      width: 80%; /* Set a fixed width for the heading */
+      text-align: center; /* Center text within the heading */
+    }
+
+    .heading_image {
+      color: white; /* Text color */
+      font-size: xxx-large;
+      letter-spacing: normal;
+      margin: 0; /* Remove default margin */
+    }
+
+    .link_image {
+      color: white !important; /* Link text color */
+      font-family: "IBM Plex Sans", sans-serif;
+      text-decoration: none; /* Remove underline from the link */
+      width:500px;
+      -webkit-transition: .3s ease-out;
+    }
+     .link_image_smaller {
+      color: white !important; /* Link text color */
+      font-family: "IBM Plex Sans", sans-serif;
+      text-decoration: none; /* Remove underline from the link */
+      width:327px;
+      -webkit-transition: .3s ease-out;
+    }
+    .cta__action{
+      font-size:medium;
+      font-weight:bold;
+      text-decoration:underline;
+    }
+
+    /* On mobile, adjust container width */
+    @media (max-width: 767px) {
+      .div-grid .grid-container .container {
+        flex: 0 0 calc(100% - 40px); /* Full width with gap */
+      }
+          .link_image_smaller {
+      color: white !important; /* Link text color */
+      font-family: "IBM Plex Sans", sans-serif;
+      text-decoration: none; /* Remove underline from the link */
+      width:450px;
+    }
+
+      .div-grid .grid-container .container {
+        height: 378px;
+      }
+    }
+    .link_image:hover{
+    opacity:.7; /* Change background color on hover */
+  }
+   .link_image_smaller:hover{
+    opacity:.7; /* Change background color on hover */
+  }
+    /* Background images for containers */
+    .image1 {
+      background-image: url('{{ section.settings.image1_url.src | image_url }}');
+    }
+    .image2 {
+      background-image: url('{{ section.settings.image2_url.src | image_url }}');
+    }
+
+    .image3 {
+      background-image: url('{{ section.settings.image3_url.src | image_url }}');
+    }
+
+    .image4 {
+      background-image: url('{{ section.settings.image4_url.src | image_url }}');
+    }
+
+    .image5 {
+      background-image: url('{{ section.settings.image5_url.src | image_url }}');
+    }
+</style>
+
+<div class="div-grid">
+  <div class="grid-container">
+    <a href="{{ section.settings.image1_link }}" class="link_image">
+      <div class="container image1" aria-label="{{ section.settings.image1_heading }}>">
+        <div class="image-heading">
+          <h2 class="heading_image">{{ section.settings.image1_heading }}</h2>
+          <span class="cta__action">Shop Now</span>
+        </div>
+      </div>
+    </a>
+    <a href="{{ section.settings.image2_link }}" class="link_image">
+      <div class="container image2" aria-label="{{ section.settings.image2_heading }}">
+        <div class="image-heading">
+          <h2 class="heading_image">{{ section.settings.image2_heading }}</h2>
+          <span class="cta__action">Shop Now</span>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="grid-container">
+    <a href="{{ section.settings.image3_link }}" class="link_image_smaller">
+      <div class="container image3" aria-label="{{ section.settings.image3_heading }}">
+        <div class="image-heading">
+          <h2 class="heading_image">{{ section.settings.image3_heading }}</h2>
+          <span class="cta__action">Shop Now</span>
+        </div>
+      </div>
+    </a>
+    <a href="{{ section.settings.image5_link }}" class="link_image_smaller">
+      <div class="container image5" aria-label="{{ section.settings.image5_heading }}">
+        <div class="image-heading">
+          <h2 class="heading_image">{{ section.settings.image5_heading }}</h2>
+          <span class="cta__action">Shop Now</span>
+        </div>
+      </div>
+    </a>
+    <a href="{{ section.settings.image4_link }}" class="link_image_smaller">
+      <div class="container image4" aria-label="{{ section.settings.image4_heading }}">
+        <div class="image-heading">
+          <h2 class="heading_image">{{ section.settings.image4_heading }}</h2>
+          <span class="cta__action">Shop Now</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage Collections",
+  "settings": [
+    {
+      "type": "text",
+      "id": "image1_heading",
+      "label": "Heading 1",
+      "default": "Heading 1"
+    },
+    {
+      "type": "text",
+      "id": "image2_heading",
+      "label": "Heading 2",
+      "default": "Heading 2"
+    },
+    {
+      "type": "text",
+      "id": "image3_heading",
+      "label": "Heading 3",
+      "default": "Heading 3"
+    },
+    {
+      "type": "text",
+      "id": "image4_heading",
+      "label": "Heading 4",
+      "default": "Heading 4"
+    },
+    {
+      "type": "text",
+      "id": "image5_heading",
+      "label": "Heading 5",
+      "default": "Heading 5"
+    },
+    {
+      "type": "url",
+      "id": "image1_link",
+      "label": "Link 1"
+    },
+    {
+      "type": "url",
+      "id": "image2_link",
+      "label": "Link 2"
+    },
+    {
+      "type": "url",
+      "id": "image3_link",
+      "label": "Link 3"
+    },
+    {
+      "type": "url",
+      "id": "image4_link",
+      "label": "Link 4"
+    },
+    {
+      "type": "url",
+      "id": "image5_link",
+      "label": "Link 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "image1_url",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image2_url",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image3_url",
+      "label": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image4_url",
+      "label": "Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image5_url",
+      "label": "Image 5"
+    }
+  ],
+  "presets": [
+              {
+        "name": "Homepage Collections"
+}
+      ]
+}
+
+{% endschema %}
